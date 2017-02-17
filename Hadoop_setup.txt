@@ -1,0 +1,58 @@
+CentOS6.8 Minimal-Desktop
+
+$ su
+# vi /etc/sudoera
+　Allows people in group wheel to run all commands
+　%wheel ALL=(ALL) ALL(ここの行頭のコメントをはずす)
+# usermod -G wheel (username
+# su (username
+$ sudo yum -y update
+$ sudo yum -y groupinstall 'Development tools'
+$ sudo yum -y install wget
+$ cd
+$ mkdir .ssh
+$ chmod 700 .ssh
+$ cd .ssh
+$ ssh-keygen -t rsa
+$ id_rsa.pub authorized_keys
+$ chmod 600 *
+$ cd /opt
+$ sudo wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/6u45-b06/jdk-6u45-linux-x64.bin
+$ sudo chmod 744 jdk-6u45-linux-x64.bin
+$ sudo rpm -ivh jdk-6u45-linux-x64.bin
+$ sudo rm -r jdk-6u45-linux-x64.bin
+$ mv jdk1.6.0_45 /usr/java
+$ cd
+$ vi .bashrc
+　export JAVA_HOME=/usr/java/jdk1.6.0_45
+　PATH=$JAVA_HOME/bin:$PATH
+$ source .bashrc
+$ sudo rpm --import http://archive.cloudera.com/cdh4/redhat/6/x86_64/cdh/RPM-GPG-KEY-cloudera
+$ sudo rpm -ivh http://archive.cloudera.com/cdh4/one-click-install/redhat/6/x86_64/cloudera-cdh-4-0.x86_64.rpm
+$ rpm -ql cloudera-cdh
+$ sudo vi /etc/yum.repos.d/cloudera-cdh4.repo
+　#baseurl…
+　baseurl=http://archive.cloudera.com/cdh4/redhat/6/x86_64/cdh/4.2.0(教科書の指定によるが、ミラーが不調)
+$ sudo yum install hadoop-0.20-conf-pseudo
+$ yum list installed | grep hadoop
+$ hadoop version
+$ view /etc/passwd
+$ ifconfig
+　ipaddをコピー
+$ sudo vi /etc/hosts
+　ipadd (username
+$ source /etc/hosts
+$ sudo -u hdfs hdfs namenode -format
+$ sudo service hadoop-hdfs-namenode start
+$ sudo service hadoop-hdfs-datanode start
+$ ps -ef | grep hadoop-hdfs | grep -v grep
+$ sudo -u hdfs hadoop fs -mkdir -p /var/lib/hadoop-hdfs/cache/mapred/mapred/staging
+$ sudo -u hdfs hadoop fs -chmod 1777 /var/lib/hadoop-hdfs/cache/mapred/mapred/staging
+$ sudo -u hdfs hadoop fs -chown -R mapred /var/lib/hadoop-hdfs/cache/mapred/
+$ sudo useradd sampleuser
+$ sudo -u hdfs hadoop fs -mkdir -p /user/sampleuser
+$ sudo -u hdfs hadoop fs -chown sampleuser /user/sampleuser
+$ sudo service hadoop-0.20-mapreduce-jobtracker start
+$ sudo service hadoop-0.20-mapreduce-tasktracker start
+$ ps -ef | grep mapreduce | grep -v grep
+$ sudo -u sampleuser hadoop jar /usr/lib/hadoop-0.20-mapreduce/hadoop-examples.jar pi 10 100000
