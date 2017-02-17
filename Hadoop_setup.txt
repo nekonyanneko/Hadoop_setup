@@ -2,8 +2,8 @@ CentOS6.8 Minimal-Desktop
 
 $ su
 # vi /etc/sudoera
-@Allows people in group wheel to run all commands
-@%wheel ALL=(ALL) ALL(‚±‚±‚Ìs“ª‚ÌƒRƒƒ“ƒg‚ğ‚Í‚¸‚·)
+ã€€Allows people in group wheel to run all commands
+ã€€%wheel ALL=(ALL) ALL(ã“ã“ã®è¡Œé ­ã®ã‚³ãƒ¡ãƒ³ãƒˆã‚’ã¯ãšã™)
 # usermod -G wheel (username
 # su (username
 $ sudo yum -y update
@@ -24,23 +24,23 @@ $ sudo rm -r jdk-6u45-linux-x64.bin
 $ mv jdk1.6.0_45 /usr/java
 $ cd
 $ vi .bashrc
-@export JAVA_HOME=/usr/java/jdk1.6.0_45
-@PATH=$JAVA_HOME/bin:$PATH
+ã€€export JAVA_HOME=/usr/java/jdk1.6.0_45
+ã€€PATH=$JAVA_HOME/bin:$PATH
 $ source .bashrc
 $ sudo rpm --import http://archive.cloudera.com/cdh4/redhat/6/x86_64/cdh/RPM-GPG-KEY-cloudera
 $ sudo rpm -ivh http://archive.cloudera.com/cdh4/one-click-install/redhat/6/x86_64/cloudera-cdh-4-0.x86_64.rpm
 $ rpm -ql cloudera-cdh
 $ sudo vi /etc/yum.repos.d/cloudera-cdh4.repo
-@#baseurlc
-@baseurl=http://archive.cloudera.com/cdh4/redhat/6/x86_64/cdh/4.2.0(‹³‰È‘‚Ìw’è‚É‚æ‚é‚ªAƒ~ƒ‰[‚ª•s’²)
+ã€€#baseurlâ€¦
+ã€€baseurl=http://archive.cloudera.com/cdh4/redhat/6/x86_64/cdh/4.2.0(æ•™ç§‘æ›¸ã®æŒ‡å®šã«ã‚ˆã‚‹ãŒã€ãƒŸãƒ©ãƒ¼ãŒä¸èª¿)
 $ sudo yum install hadoop-0.20-conf-pseudo
 $ yum list installed | grep hadoop
 $ hadoop version
 $ view /etc/passwd
 $ ifconfig
-@ipadd‚ğƒRƒs[
+ã€€ipaddã‚’ã‚³ãƒ”ãƒ¼
 $ sudo vi /etc/hosts
-@ipadd (username
+ã€€ipadd (username
 $ source /etc/hosts
 $ sudo -u hdfs hdfs namenode -format
 $ sudo service hadoop-hdfs-namenode start
